@@ -1,45 +1,61 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var path = require('path')
-var webpack = require('webpack')
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var path = require('path');
+var fs = require('fs');
 
-const sassLoaders = [
-  'css-loader',
-  'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve(__dirname, './app')
-]
+var BUILD_DIR = path.resolve(__dirname, 'build');
+var APP_DIR = path.resolve(__dirname, 'app');
 
-var APP_DIR = path.resolve(__dirname, 'app')
-var BUILD_DIR = path.resolve(__dirname, 'build/js/')
+// clean our build folder
+function Clean() {
+  this.recursive = function(path) {
+    if(path === "/") return;
+    if( !fs.existsSync(path) ) return;
+    var self = this;
+    fs.readdirSync(path).forEach(function(file,index){
+      var curPath = path + "/" + file;
+      if(fs.lstatSync(curPath).isDirectory()) // recurse
+        self.recursive(curPath);
+      else
+        fs.unlinkSync(curPath);
+    });
+    fs.rmdirSync(path);
+  };
+}
+
+Clean.prototype.apply = function(compiler) {
+  var self = this;
+  compiler.plugin('run', function() {
+    console.info('cleaned');
+    self.recursive(BUILD_DIR);
+  });
+};
+
+var clean = new Clean();
+clean.recursive(BUILD_DIR);
 
 var config = {
-  entry: path.resolve(APP_DIR, 'index.jsx'),
+  context: path.join(__dirname, 'app'),
+  entry: APP_DIR + '/index.jsx',
   output: {
     path: BUILD_DIR,
-    filename: 'bundle.js',
-    publicPath: '/'
+    filename: 'js/bundle.js'
   },
-  module: {
-    loaders: [
+  module : {
+    loaders : [
       {
-        test: /\.(jsx|js)?/,
-        include: APP_DIR,
-        exclude: /node_modules/,
-        loader: 'babel'
-      },
-      {
-        test: /.*\.(png|gif|jpe?g|svg)$/i,
-        loaders: [
-          'file?name=/images/[sha512:hash:base64:7].[ext]',
-          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-        ]
-      },
-      { test: /\.sass$/,
-        loader: ExtractTextPlugin.extract('style-loader', sassLoaders.join('!'))
+        test : /\.jsx?/,
+        include : APP_DIR,
+        loader : 'babel'
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin('/css/bundle.css')
+    //new Clean({}),
+    new CopyWebpackPlugin([
+      { from: 'index.html', to: 'index.html' },
+      { from: 'img/**/*', to: 'img' }
+    ])
   ]
-}
+};
 
-module.exports = config
+module.exports = config;
