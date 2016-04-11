@@ -14,7 +14,8 @@
     "url": "https://github.com/mneil/react-boilerplate"
   },
   "scripts": {
-    "dev": "webpack-dev-server --content-base build/ --inline --history-api-fallback --host 0.0.0.0",
+    "dev2": "webpack -d --watch --config webpack.config.js",
+    "dev": "webpack-dev-server --content-base build/ --history-api-fallback --host 0.0.0.0",
     "build": "webpack -p --config webpack.production.config.js"
   },
   "dependencies": {

@@ -1,5 +1,6 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var path = require('path')
+var webpack = require('webpack')
 
 const sassLoaders = [
   'css-loader',
@@ -7,13 +8,13 @@ const sassLoaders = [
 ]
 
 var APP_DIR = path.resolve(__dirname, 'app')
-var BUILD_DIR = path.resolve(__dirname, 'public')
+var BUILD_DIR = path.resolve(__dirname, 'build/js/')
 
 var config = {
   entry: path.resolve(APP_DIR, 'index.jsx'),
   output: {
     path: BUILD_DIR,
-    filename: '/js/bundle.js',
+    filename: 'bundle.js',
     publicPath: '/'
   },
   module: {

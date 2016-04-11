@@ -6,6 +6,8 @@ var NavList = React.createClass({
     callbackLinkClick: React.PropTypes.func
   },
   handleLinkClick: function () {
+    console.log('clicked on this');
+    console.log('updated');
     this.props.callbackLinkClick()
   },
   render: function () {
