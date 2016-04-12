@@ -1,6 +1,6 @@
 import React from 'react'
 
-var Home = React.createClass({
+var About = React.createClass({
   propTypes: {
   },
   render: function () {
@@ -10,7 +10,7 @@ var Home = React.createClass({
             <div>
               <br /><br />
               <h2>
-               Hello World
+               Aboot
               </h2>
             </div>
           </div>
@@ -19,4 +19,4 @@ var Home = React.createClass({
   }
 })
 
-export default Home
+export default About

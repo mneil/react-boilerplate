@@ -9,6 +9,7 @@ var NavLink = React.createClass({
     callbackLinkClick: React.PropTypes.func
   },
   handleClick: function (link, e) {
+    console.log('push state');
     e.preventDefault()
     if (this.props.callbackLinkClick) { this.props.callbackLinkClick() }
     browserHistory.push(link)

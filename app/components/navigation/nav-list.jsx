@@ -8,7 +8,7 @@ var NavList = React.createClass({
   handleLinkClick: function () {
     console.log('clicked on this');
     console.log('updated');
-    this.props.callbackLinkClick()
+    //this.props.callbackLinkClick()
   },
   render: function () {
     var linkList = [

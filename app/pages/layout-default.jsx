@@ -15,8 +15,8 @@ var LayoutDefault = React.createClass({
   },
   render: function () {
     return (
-      <div className='inner-wrap'>
-        <section className='main-section'>
+      <div>
+        <section>
           <Header/>
           <Footer />
         </section>

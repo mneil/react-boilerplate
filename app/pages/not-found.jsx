@@ -3,9 +3,9 @@ import React from 'react'
 var NotFound = React.createClass({
   render: function () {
     return (
-        <div className='home'>
-          <div className='striped-bg in-it' style={{minHeight: 500}}>
-            <div className='row'>
+        <div>
+          <div style={{minHeight: 500}}>
+            <div>
               <br /><br />
               <h2>
                 Sorry, we're not ready for this page yet
