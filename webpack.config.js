@@ -53,7 +53,7 @@ var config = {
     //new Clean({}),
     new CopyWebpackPlugin([
       { from: 'index.html', to: 'index.html' },
-      { from: 'img/**/*', to: 'img' }
+      { from: 'images/**/*', to: 'images' }
     ])
   ]
 };

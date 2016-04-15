@@ -1,22 +1,19 @@
 import React from 'react'
 
-var Home = React.createClass({
-  propTypes: {
-  },
+var HomeBody = React.createClass({
+
   render: function () {
     return (
-        <div>
-          <div style={{minHeight: 500}}>
-            <div>
-              <br /><br />
-              <h2>
-               Hello World
-              </h2>
+      <div className='home'>
+          <div className='row'>
+            <div className='small-12 column'>
+            <br /><br />
+            There's no place like home
             </div>
           </div>
-        </div>
+      </div>
     )
   }
 })
 
-export default Home
+export default HomeBody

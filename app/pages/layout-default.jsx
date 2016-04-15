@@ -1,10 +1,7 @@
 import React from 'react'
-var router = require('react-router')
 
-import Header from '../components/layout/header.jsx'
-import Footer from '../components/layout/footer.jsx'
-
-import '../sass/base.sass'
+import Header from '../components/header/main.jsx'
+import Footer from '../components/footer/main.jsx'
 
 var LayoutDefault = React.createClass({
   propTypes: {
@@ -13,14 +10,26 @@ var LayoutDefault = React.createClass({
   componentDidMount: function () {
     window.scrollTo(0, 0)
   },
+  getInitialState: function () {
+    return {
+    }
+  },
   render: function () {
     return (
-      <div>
-        <section>
-          <Header/>
-          <Footer />
-        </section>
-      </div>
+        <div>
+
+          <section>
+
+            <Header/>
+
+            {React.cloneElement(this.props.children, {
+              callbackAuthChanged: this.onAuthChanged,
+              callbackShowSignInModal: this.showSignInModal})}
+            <Footer />
+
+          </section>
+
+        </div>
     )
   }
 })

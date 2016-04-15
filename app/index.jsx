@@ -4,8 +4,8 @@ import { Router, browserHistory } from 'react-router'
 var routes = require('./routes.jsx')
 
 ReactDOM.render((
-        <Router history={browserHistory}>
-          {routes}
-        </Router>),
-    document.getElementById('App')
+  <Router history={browserHistory}>
+    {routes}
+  </Router>),
+  document.getElementById('SiteApp')
 )
