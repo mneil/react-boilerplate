@@ -8,11 +8,11 @@ var APP_DIR = path.resolve(__dirname, 'app');
 // clean our build folder
 function Clean() {
   this.recursive = function(path) {
-    if(path === "/") return;
+    if(path === '/') return;
     if( !fs.existsSync(path) ) return;
     var self = this;
     fs.readdirSync(path).forEach(function(file,index){
-      var curPath = path + "/" + file;
+      var curPath = path + '/' + file;
       if(fs.lstatSync(curPath).isDirectory()) // recurse
         self.recursive(curPath);
       else
@@ -33,7 +33,8 @@ Clean.prototype.apply = function(compiler) {
 var clean = new Clean();
 clean.recursive(BUILD_DIR);
 
-var config = {
+var config = [{
+  name : 'js',
   context: path.join(__dirname, 'app'),
   entry: APP_DIR + '/index.jsx',
   output: {
@@ -46,16 +47,35 @@ var config = {
         test : /\.jsx?/,
         include : APP_DIR,
         loader : 'babel'
-      }
+      }/*,
+      {
+        test: /\.s[c|a]ss$/,
+        loaders: ['css?minimize!./css/bundle.css', 'sass']
+      }*/
     ]
   },
   plugins: [
-    //new Clean({}),
     new CopyWebpackPlugin([
       { from: 'index.html', to: 'index.html' },
       { from: 'images/**/*', to: 'images' }
     ])
   ]
-};
+},{
+  name : 'css',
+  context: path.join(__dirname, 'app'),
+  //entry: APP_DIR + '/index.jsx',
+  output: {
+    path: BUILD_DIR,
+    filename: 'css/bundle.css'
+  },
+  module : {
+    loaders : [
+      {
+        test: /\.s[c|a]ss$/,
+        loaders: ['css?minimize', 'sass']
+      }
+    ]
+  }
+}];
 
 module.exports = config;

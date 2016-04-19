@@ -3,6 +3,9 @@ import React from 'react'
 import Header from '../components/header/main.jsx'
 import Footer from '../components/footer/main.jsx'
 
+//import '../sass/base.sass'
+
+
 var LayoutDefault = React.createClass({
   propTypes: {
     children: React.PropTypes.object
@@ -16,7 +19,7 @@ var LayoutDefault = React.createClass({
   },
   render: function () {
     return (
-        <div>
+        <div id="main">
 
           <section>
 

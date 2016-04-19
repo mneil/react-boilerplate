@@ -10,7 +10,8 @@ var NavigationListItems = React.createClass({
   },
   render: function () {
     var linkList = [
-      {url: '/reporting', text: 'Reporting'}
+      {url: '/reporting', text: 'Reporting'},
+      {url: '/test', text: '404'}
     ]
     return (
       <ul className='menu'>
